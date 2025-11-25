@@ -1,0 +1,458 @@
+# YAML Project Specification Template
+# Für KI-gestütztes projektbasiertes Lernen
+
+# =============================================================================
+# PROJEKT-SPEZIFIKATION
+# Diese Datei wird vom KI-Copilot automatisch erstellt und während des 
+# Projekts aktualisiert. Sie dient als "Single Source of Truth" für alle
+# projekt- und lernbezogenen Informationen.
+# =============================================================================
+
+version: "1.0"
+created_at: "2025-03-15T10:00:00Z"
+last_updated: "2025-03-15T10:00:00Z"
+
+# =============================================================================
+# PROJEKTINFORMATIONEN
+# =============================================================================
+project:
+  name: "Mein tolles Projekt"
+  type: "game"  # game, app, tool, animation, website, library, other
+  description: |
+    Eine kurze Beschreibung des Projekts.
+    Was macht es? Für wen ist es?
+  
+  # Sprache und Technologie
+  technology:
+    primary_language: "python"  # python, javascript, java, scratch, etc.
+    frameworks: []  # z.B. ["pygame", "flask"]
+    libraries: []   # z.B. ["numpy", "requests"]
+    tools: []       # z.B. ["vscode", "git"]
+  
+  # Repository-Informationen (optional)
+  repository:
+    url: null
+    branch: "main"
+  
+  # Projektdateien
+  files:
+    main: "main.py"  # Hauptdatei
+    structure:
+      - path: "main.py"
+        description: "Hauptprogramm"
+      - path: "utils.py"
+        description: "Hilfsfunktionen"
+      - path: "assets/"
+        description: "Bilder, Sounds, etc."
+
+# =============================================================================
+# ZIELE & ERFOLG
+# =============================================================================
+goals:
+  # Das Hauptziel des Projekts
+  main: "Ein funktionierendes [Projekttyp] erstellen, das [Funktion] kann."
+  
+  # Teilziele (optional)
+  sub_goals:
+    - "Feature 1 implementieren"
+    - "Design erstellen"
+    - "Tests schreiben"
+  
+  # Wann ist das Projekt erfolgreich?
+  success_criteria:
+    - criterion: "Hauptfunktionalität läuft fehlerfrei"
+      status: "not-started"  # not-started, in-progress, completed
+    - criterion: "Benutzer kann alle geplanten Aktionen ausführen"
+      status: "not-started"
+    - criterion: "Code ist kommentiert und dokumentiert"
+      status: "not-started"
+  
+  # Optional: MVP (Minimum Viable Product)
+  mvp:
+    description: "Die absolute Minimal-Version, die funktionieren muss"
+    features:
+      - "Kern-Feature 1"
+      - "Kern-Feature 2"
+
+# =============================================================================
+# ANFORDERUNGEN (Requirements)
+# =============================================================================
+requirements:
+  # Funktionale Anforderungen
+  functional:
+    - id: "REQ-F-001"
+      description: "Das Programm soll [Funktion] können"
+      priority: "must-have"  # must-have, should-have, nice-to-have
+      status: "not-started"  # not-started, in-progress, completed, blocked
+      notes: ""
+      
+    - id: "REQ-F-002"
+      description: "Der Benutzer soll [Aktion] durchführen können"
+      priority: "must-have"
+      status: "not-started"
+      notes: ""
+  
+  # Nicht-funktionale Anforderungen (optional für fortgeschrittene Lernende)
+  non_functional:
+    - id: "REQ-NF-001"
+      category: "performance"  # performance, usability, security, etc.
+      description: "Das Programm soll in unter 1 Sekunde starten"
+      priority: "should-have"
+      status: "not-started"
+  
+  # Interaktionen
+  interactions:
+    inputs:
+      - type: "keyboard"
+        description: "Pfeiltasten für Bewegung"
+      - type: "mouse"
+        description: "Klicks auf Buttons"
+      - type: "touch"
+        description: "Touch-Gesten auf Mobilgeräten"
+    
+    outputs:
+      - type: "graphics"
+        description: "2D-Grafiken und Animationen"
+      - type: "sound"
+        description: "Hintergrundmusik und Soundeffekte"
+      - type: "text"
+        description: "Textausgabe für Punkte und Status"
+
+# =============================================================================
+# LERNZIELE
+# =============================================================================
+learning_objectives:
+  # Jedes Lernziel entspricht einem Programmier-Konzept
+  - id: "LO-001"
+    concept: "variables"
+    title: "Variablen verstehen und verwenden"
+    description: |
+      Verstehen, wie man Daten in Variablen speichert und abruft.
+      Unterschiedliche Datentypen kennenlernen.
+    
+    level: "beginner"  # beginner, intermediate, advanced
+    category: "fundamentals"  # fundamentals, control-flow, data-structures, oop, etc.
+    
+    status: "not-started"  # not-started, in-progress, completed
+    progress: 0  # 0-100%
+    
+    # Wo im Projekt wird dieses Konzept benötigt?
+    used_in:
+      - "main.py:15-20"
+      - "player.py:5-10"
+    
+    # Ressourcen zum Lernen
+    resources:
+      - type: "learning-path"
+        title: "Variablen und Datentypen"
+        path: "/learning-paths/basics/variables.md"
+      - type: "video"
+        title: "Python Variablen Tutorial"
+        url: "https://..."
+      - type: "exercise"
+        title: "Übung: Variablen Basics"
+        path: "/exercises/variables-basics.md"
+    
+    # Checkpunkte zum Testen des Verständnisses
+    checkpoints:
+      - question: "Was ist eine Variable?"
+        answer: "Ein Container zum Speichern von Daten"
+        status: "not-answered"  # not-answered, correct, needs-review
+      - question: "Wie erstellt man eine Variable in Python?"
+        answer: "name = wert"
+        status: "not-answered"
+  
+  - id: "LO-002"
+    concept: "conditionals"
+    title: "If-Bedingungen verwenden"
+    description: |
+      Entscheidungen im Code treffen mit if/elif/else.
+    level: "beginner"
+    category: "control-flow"
+    status: "not-started"
+    progress: 0
+    used_in:
+      - "game_logic.py:25-40"
+    resources: []
+    checkpoints: []
+
+  - id: "LO-003"
+    concept: "loops"
+    title: "Schleifen verstehen (for, while)"
+    description: |
+      Code wiederholen mit for- und while-Schleifen.
+    level: "beginner"
+    category: "control-flow"
+    status: "not-started"
+    progress: 0
+    used_in:
+      - "main.py:30-45"
+    resources: []
+    checkpoints: []
+
+# =============================================================================
+# MEILENSTEINE (Milestones)
+# =============================================================================
+milestones:
+  - id: "M-001"
+    title: "Projekt-Setup"
+    description: "Repository erstellen, Dateien anlegen, Entwicklungsumgebung einrichten"
+    status: "not-started"  # not-started, in-progress, completed
+    due_date: null
+    
+    tasks:
+      - id: "T-001"
+        description: "Projekt-Ordner erstellen"
+        status: "not-started"
+        assignee: "student"
+      - id: "T-002"
+        description: "main.py Datei anlegen"
+        status: "not-started"
+        assignee: "student"
+      - id: "T-003"
+        description: "Erste Test-Ausgabe (Hello World)"
+        status: "not-started"
+        assignee: "student"
+    
+    deliverables:
+      - "Funktionierendes Python-Setup"
+      - "Erste ausführbare Datei"
+    
+    learning_focus:
+      - "LO-001"  # Referenz zu Learning Objectives
+  
+  - id: "M-002"
+    title: "Grundfunktionalität"
+    description: "Kernfeatures implementieren"
+    status: "not-started"
+    due_date: null
+    
+    tasks:
+      - id: "T-004"
+        description: "Spieler-Bewegung implementieren"
+        status: "not-started"
+        assignee: "student"
+      - id: "T-005"
+        description: "Kollisionserkennung hinzufügen"
+        status: "not-started"
+        assignee: "student"
+    
+    deliverables:
+      - "Bewegbare Spielfigur"
+      - "Einfache Kollisionserkennung"
+    
+    learning_focus:
+      - "LO-002"
+      - "LO-003"
+  
+  - id: "M-003"
+    title: "Verbesserungen & Polish"
+    description: "Features verfeinern, Design verbessern, Bugs fixen"
+    status: "not-started"
+    due_date: null
+    
+    tasks:
+      - id: "T-006"
+        description: "Sound-Effekte hinzufügen"
+        status: "not-started"
+        assignee: "student"
+      - id: "T-007"
+        description: "Grafiken verbessern"
+        status: "not-started"
+        assignee: "student"
+      - id: "T-008"
+        description: "Code aufräumen und kommentieren"
+        status: "not-started"
+        assignee: "student"
+    
+    deliverables:
+      - "Fertiges, poliertes Spiel"
+      - "Dokumentierter Code"
+    
+    learning_focus: []
+
+# =============================================================================
+# STUDENT-PROFIL
+# =============================================================================
+student_profile:
+  # Name (optional)
+  name: null
+  
+  # Aktuelles Wissenslevel
+  level: "beginner"  # beginner, intermediate, advanced
+  
+  # Bekannte Konzepte (wird automatisch aktualisiert)
+  known_concepts:
+    - "print statements"
+    - "basic math"
+  
+  # Lerngeschwindigkeit
+  learning_pace: "normal"  # slow, normal, fast
+  
+  # Präferenzen
+  preferences:
+    # Wie viel Unterstützung wird bevorzugt?
+    support_level: "medium"  # low (wenig Hilfe), medium, high (viel Hilfe)
+    
+    # Bevorzugter Lernstil
+    learning_style: "hands-on"  # visual, hands-on, theoretical, mixed
+    
+    # Sprache
+    language: "de"  # de, en, etc.
+  
+  # Fortschritt & Statistiken
+  progress:
+    projects_completed: 0
+    concepts_mastered: 0
+    total_lines_of_code: 0
+    debugging_success_rate: 0.0  # 0.0-1.0
+    
+    # Stärken & Schwächen
+    strengths: []
+    areas_for_improvement: []
+  
+  # Engagement-Tracking
+  engagement:
+    last_active: null
+    session_count: 0
+    average_session_duration: 0  # Minuten
+    motivation_level: "high"  # low, medium, high
+    
+    # Warnsignale für Copilot
+    warning_signals:
+      frustration_detected: false
+      long_inactivity: false
+      copy_without_understanding: false
+
+# =============================================================================
+# REFLEXION & LEARNINGS
+# =============================================================================
+reflection:
+  # Dev-Log Einträge
+  dev_logs:
+    - date: "2025-03-15"
+      session_duration: 60  # Minuten
+      achievements:
+        - "Erste Funktion geschrieben"
+        - "Variablen verstanden"
+      challenges:
+        - problem: "Syntax-Fehler bei if-Statement"
+          solution: "Doppelpunkt vergessen - jetzt gemerkt!"
+          lesson_learned: "Python braucht : nach if"
+      mood: "excited"  # frustrated, neutral, excited
+      notes: |
+        Heute war super! Habe endlich verstanden, wie Variablen funktionieren.
+  
+  # Gelernte Konzepte (Zusammenfassung)
+  learned_concepts:
+    - concept: "variables"
+      date_learned: "2025-03-15"
+      confidence: "high"  # low, medium, high
+      notes: "Verstehe verschiedene Datentypen"
+  
+  # Häufige Fehler (für personalisiertes Lernen)
+  common_mistakes:
+    - error_type: "SyntaxError"
+      frequency: 3
+      last_occurrence: "2025-03-15"
+      pattern: "Vergisst oft Doppelpunkt nach if"
+      teaching_note: "Erinnere an : bei Bedingungen"
+
+# =============================================================================
+# ASSESSMENT & EVALUATION
+# =============================================================================
+assessment:
+  # Automatische Bewertungen
+  automated_checks:
+    - check_id: "code-quality"
+      criteria: "Code ist kommentiert"
+      status: "pass"  # pass, fail, pending
+      score: 0.8  # 0.0-1.0
+      last_checked: "2025-03-15"
+    
+    - check_id: "functionality"
+      criteria: "Alle Features funktionieren"
+      status: "pending"
+      score: 0.0
+      last_checked: null
+  
+  # Selbst-Assessment durch Schüler
+  self_assessment:
+    confidence_level: 0.7  # 0.0-1.0
+    perceived_difficulty: "medium"  # easy, medium, hard
+    satisfaction: 0.9  # 0.0-1.0
+  
+  # Copilot-Assessment
+  copilot_assessment:
+    # Wie gut war die Scaffolding-Unterstützung?
+    scaffolding_effectiveness: null  # 0.0-1.0
+    
+    # Wie selbstständig arbeitet der Schüler?
+    independence_level: 0.5  # 0.0 (viel Hilfe nötig) - 1.0 (sehr selbstständig)
+    
+    # Transfer-Fähigkeit: Kann Gelerntes anwenden?
+    transfer_ability: null  # 0.0-1.0
+    
+    # Empfohlenes nächstes Level
+    recommended_next_level: "beginner"  # beginner, intermediate, advanced
+    
+    notes: |
+      Schüler zeigt gutes Verständnis für Grundkonzepte.
+      Braucht noch Übung bei Schleifen.
+
+# =============================================================================
+# NÄCHSTE SCHRITTE
+# =============================================================================
+next_steps:
+  # Kurzfristig (dieses Projekt)
+  immediate:
+    - "Feature X implementieren"
+    - "Bug Y fixen"
+    - "Code kommentieren"
+  
+  # Nächstes Projekt
+  future_projects:
+    - title: "Projekt-Idee 1"
+      description: "Basierend auf aktuellem Wissen"
+      estimated_difficulty: "medium"
+      new_concepts: ["functions", "lists"]
+    
+    - title: "Projekt-Idee 2"
+      description: "Herausfordernderes Projekt"
+      estimated_difficulty: "hard"
+      new_concepts: ["classes", "file-handling"]
+  
+  # Lernressourcen für später
+  recommended_resources:
+    - type: "learning-path"
+      title: "Objektorientierte Programmierung"
+      reason: "Für komplexere Projekte hilfreich"
+      priority: "medium"
+
+# =============================================================================
+# METADATEN & TRACKING
+# =============================================================================
+metadata:
+  # Spec-Version
+  spec_version: "1.0"
+  
+  # Erstellt von
+  created_by: "copilot"
+  
+  # Letzte Aktualisierung
+  last_modified_by: "copilot"
+  
+  # Change-Log
+  changelog:
+    - date: "2025-03-15T10:00:00Z"
+      author: "copilot"
+      changes: "Initial project spec created"
+  
+  # Tags für Kategorisierung
+  tags:
+    - "beginner"
+    - "game-development"
+    - "python"
+  
+  # Zustand
+  status: "active"  # active, paused, completed, archived
