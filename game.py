@@ -3,7 +3,7 @@ import random
 
 
 class Character:
-    def __init__(self, player_name: str, role: str, hp: int, atk: int, df: int, spd: int, desc: str):
+    def __init__(self, player_name: str, role: str, hp: int, atk: int, df: int, spd: int, desc: str, symbol: str = "👤", ability: str = "", ability_desc: str = ""):
         self.player_name = player_name
         self.role = role
         self.max_hp = hp
@@ -12,6 +12,10 @@ class Character:
         self.df = df
         self.spd = spd
         self.desc = desc
+        self.symbol = symbol
+        self.ability = ability
+        self.ability_desc = ability_desc
+        self.ability_ready = True  # Track if ability is ready to use
 
     def is_alive(self):
         return self.hp > 0
@@ -20,28 +24,121 @@ class Character:
         self.hp = max(0, self.hp - amount)
 
     def __str__(self):
-        return f"{self.player_name} ({self.role}) HP:{self.hp}/{self.max_hp} ATK:{self.atk} DEF:{self.df} SPD:{self.spd}"
+        return f"{self.symbol} {self.player_name} ({self.role}) HP:{self.hp}/{self.max_hp} ATK:{self.atk} DEF:{self.df} SPD:{self.spd}"
 
 
 CHAR_TEMPLATES = {
-    "1": {"role": "Ritter", "desc": "Stark in Verteidigung", "hp": 130, "atk": 10, "df": 10, "spd": 3},
-    "2": {"role": "Zauberer", "desc": "Starker Zauberschaden", "hp": 90, "atk": 16, "df": 4, "spd": 5},
-    "3": {"role": "Dieb", "desc": "Hohe Geschicklichkeit", "hp": 100, "atk": 12, "df": 6, "spd": 8},
-    "4": {"role": "Bogenschütze", "desc": "Gute Reichweite", "hp": 110, "atk": 13, "df": 7, "spd": 6},
+    "1": {
+        "role": "Ritter", 
+        "desc": "Stark in Verteidigung - Der Waechter des Waldes",
+        "lore": "Ein tapferer Ritter mit Schwert und Schild. Bekannt fuer seine Staerke und Ausdauer.",
+        "symbol": "[K]",
+        "hp": 140, "atk": 11, "df": 12, "spd": 3,
+        "ability": "Schildschlag",
+        "ability_desc": "Blockiert 50% des naechsten Schadens"
+    },
+    "2": {
+        "role": "Zauberer", 
+        "desc": "Starker Zauberschaden - Der mystische Gelehrte",
+        "lore": "Ein maechtiger Zauberer mit arcaner Magie. Kann Monster mit Feuerzaubern vernichten.",
+        "symbol": "[Z]",
+        "hp": 85, "atk": 18, "df": 5, "spd": 6,
+        "ability": "Feuerzauber",
+        "ability_desc": "Verursacht doppelten Schaden beim naechsten Angriff"
+    },
+    "3": {
+        "role": "Dieb", 
+        "desc": "Hohe Geschicklichkeit - Der Schattenlaeufer",
+        "lore": "Ein flinker Dieb aus den Schatten. Nutzt Geschwindigkeit und List, um Gegner zu besiegen.",
+        "symbol": "[D]",
+        "hp": 100, "atk": 13, "df": 7, "spd": 9,
+        "ability": "Hinterhalt",
+        "ability_desc": "Greift zweimal hintereinander an"
+    },
+    "4": {
+        "role": "Bogenschuetze", 
+        "desc": "Gute Reichweite - Der Wildnis-Jaeger",
+        "lore": "Ein geschickter Bogenschuetze aus dem Wald. Trifft seine Gegner aus großer Entfernung.",
+        "symbol": "[B]",
+        "hp": 115, "atk": 14, "df": 8, "spd": 7,
+        "ability": "Praezisionsschuss",
+        "ability_desc": "Garantiert kritischen Treffer (1,5x Schaden)"
+    },
 }
 
 MATERIAL_TYPES = ["holz", "stein", "gras"]
 
 
+# ASCII Art für Charaktere
+CHARACTER_ASCII = {
+    "Ritter": """
+    [RITTER]
+      |O_O|
+      |=|=|
+      |   |
+     /| | |\\
+      | | |
+     /| | |\\
+    """,
+    "Zauberer": """
+    [ZAUBERER]
+      (o o)
+      /| |\\
+      / | \\
+       /|\\
+      / | \\
+    """,
+    "Dieb": """
+    [DIEB]
+     /o_o\\
+     |~~~|
+    /| | |\\
+     | | |
+    /| | |\\
+    """,
+    "Bogenschütze": """
+    [BOGENSCHUETZE]
+      (o_o)
+      >-|-<
+      /| |\\
+       | |
+      /| |\\
+    """
+}
+
+# ASCII Art für Monster
+MONSTER_ASCII = {
+    "Goblin": """
+    [GOBLIN]
+      />_<\\
+      |~u~|
+     /| | |\\
+      | | |
+     /| | |\\
+    """,
+    "Ork_Boss": """
+    [ORK BOSS]
+      /o^o\\
+      |XXX|
+     /|XXX|\\
+      |XXX|
+     /|XXX|\\
+    """
+}
+
+
 def choose_char(player_name: str) -> Character:
     print(f"\n{player_name}, wähle deinen Charakter:")
     for k, tmpl in CHAR_TEMPLATES.items():
-        print(f"{k}. {tmpl['role']} - {tmpl['desc']} (HP {tmpl['hp']}, ATK {tmpl['atk']}, DEF {tmpl['df']}, SPD {tmpl['spd']})")
+        print(f"\n{k}. {tmpl['symbol']} {tmpl['role']} - {tmpl['desc']}")
+        print(f"   Lore: {tmpl['lore']}")
+        print(f"   Fähigkeit: {tmpl['ability']} - {tmpl['ability_desc']}")
+        print(f"   Stats: HP {tmpl['hp']}, ATK {tmpl['atk']}, DEF {tmpl['df']}, SPD {tmpl['spd']}")
     while True:
-        choice = input("Nummer eingeben (1-4): ").strip()
+        choice = input("\nNummer eingeben (1-4): ").strip()
         if choice in CHAR_TEMPLATES:
             t = CHAR_TEMPLATES[choice]
-            return Character(player_name, t['role'], t['hp'], t['atk'], t['df'], t['spd'], t['desc'])
+            return Character(player_name, t['role'], t['hp'], t['atk'], t['df'], t['spd'], t['desc'], t['symbol'], t['ability'], t['ability_desc'])
         print("Ungültige Wahl. Bitte 1-4 eingeben.")
 
 
@@ -93,6 +190,22 @@ def calculate_damage(attacker_atk: int, defender_df: int):
     return dmg
 
 
+def show_character_art(role: str):
+    """Display ASCII art for a character"""
+    if role in CHARACTER_ASCII:
+        print(CHARACTER_ASCII[role])
+
+
+def show_monster_art(name: str):
+    """Display ASCII art for a monster"""
+    # Get the base name (e.g. "Goblin_1" -> "Goblin")
+    base_name = name.split('_')[0]
+    if base_name in MONSTER_ASCII:
+        print(MONSTER_ASCII[base_name])
+    else:
+        print(f"👹 {name} 👹")
+
+
 def combat_round(players, monsters):
     """Run turns until one side is all dead. Returns True if players won."""
     # create turn order by speed (players and monsters mixed)
@@ -135,9 +248,14 @@ def combat_round(players, monsters):
 
 def run_wave(players, wave_number: int, auto=False):
     monsters = generate_wave(wave_number)
-    print(f"\nWelle {wave_number} gestartet! Gegner:")
+    print(f"\n{'='*60}")
+    print(f">>> WELLE {wave_number} GESTARTET! <<<")
+    print(f"{'='*60}")
+    print(f"\nGegner:")
     for m in monsters:
         print(f"- {m}")
+        show_monster_art(m.name)
+    print(f"{'='*60}\n")
 
     # combat loop: we will perform repeated rounds until one side falls
     round_no = 1
@@ -178,14 +296,18 @@ def run_wave(players, wave_number: int, auto=False):
 
 
 def main(auto=False):
-    print("Willkommen zum Klara Abenteuer-Spiel! 🎮")
+    print("Willkommen zum Klara Abenteuer-Spiel!")
+    print(">>> MULTIPLAYER KAMPFSPIEL <<<\n")
 
     if auto:
         # Demo-Modus: erstelle automatisch 3 Spieler mit templates
         num_players = 3
         player_names = [f"Spieler{i}" for i in range(1, num_players + 1)]
         demo_keys = ["1", "2", "3"]
-        players = [Character(n, CHAR_TEMPLATES[k]['role'], CHAR_TEMPLATES[k]['hp'], CHAR_TEMPLATES[k]['atk'], CHAR_TEMPLATES[k]['df'], CHAR_TEMPLATES[k]['spd'], CHAR_TEMPLATES[k]['desc']) for n, k in zip(player_names, demo_keys)]
+        players = []
+        for n, k in zip(player_names, demo_keys):
+            t = CHAR_TEMPLATES[k]
+            players.append(Character(n, t['role'], t['hp'], t['atk'], t['df'], t['spd'], t['desc'], t['symbol'], t['ability'], t['ability_desc']))
         print("Demo-Modus: 3 Spieler wurden automatisch erstellt.")
     else:
         # Frage nach Spieleranzahl
@@ -213,16 +335,22 @@ def main(auto=False):
             players.append(char)
 
     # Zeige Zusammenfassung
-    print("\nSpielerübersicht:")
+    print("\n" + "="*60)
+    print("=== CHARAKTERE GEWAEHLT ===")
+    print("="*60)
     for p in players:
-        print(f"- {p}")
-
-    print("\nCharaktere wurden erstellt. Nächster Schritt: Kampfsystem implementieren.")
+        print(f"\n{p.symbol} {p.player_name} als {p.role}")
+        print(f"   {p.desc}")
+        print(f"   Faehigkeit: {p.ability} - {p.ability_desc}")
+        show_character_art(p.role)
+    print("="*60)
+    print("\nCharaktere wurden erstellt. Naechster Schritt: Kampfsystem implementieren.")
 
     # initialize materials for crafting
     for p in players:
         # inventory supports many material types
         p.inventory = {m: getattr(p, 'inventory', {}).get(m, 0) for m in MATERIAL_TYPES}
+        p.placed_blocks = getattr(p, 'placed_blocks', 0)  # track 4x4 wooden blocks built
 
     # simple game loop: run waves until players die or choose to stop
     wave = 1
@@ -240,7 +368,7 @@ def main(auto=False):
                 inv = p.inventory
                 inv_str = ", ".join(f"{k}:{v}" for k, v in inv.items())
                 print(f"{p.player_name} Inventar: {inv_str}")
-                choice = input(f"{p.player_name}: craft? (1=Waffe +2ATK kostet holz:2, 2=Heiltrank +30HP kostet gras:1, 3=Schild +2DEF kostet stein:2, enter=weiter): ").strip()
+                choice = input(f"{p.player_name}: craft? (1=Waffe +2ATK kostet holz:2, 2=Heiltrank +30HP kostet gras:1, 3=Schild +2DEF kostet stein:2, 4=Holzblock 4x4 kostet holz:4, enter=weiter): ").strip()
                 def can_afford(inv, cost):
                     return all(inv.get(k, 0) >= v for k, v in cost.items())
                 def pay_cost(inv, cost):
@@ -259,16 +387,26 @@ def main(auto=False):
                     p.df += 2
                     pay_cost(inv, {'stein': 2})
                     print(f"{p.player_name} hat ein Schild gebaut! DEF nun {p.df}.")
+                elif choice == '4' and can_afford(inv, {'holz': 4}):
+                    p.placed_blocks += 1
+                    pay_cost(inv, {'holz': 4})
+                    print(f"{p.player_name} hat einen 4x4 Holzblock gebaut! Blöcke: {p.placed_blocks}.")
                 else:
                     if choice:
                         print("Ungültig oder nicht genug Materialien.")
+                # show available blocks
+                print(f"{p.player_name} hat {p.placed_blocks} 4x4 Holzblöcke gebaut.")
         else:
-            # demo auto-crafting: priority Waffe if possible, else Heiltrank
+            # demo auto-crafting: priority Waffe if possible, else Heiltrank, else Holzblock
             for p in players:
                 if not p.is_alive():
                     continue
                 inv = p.inventory
-                if inv.get('holz', 0) >= 2:
+                if inv.get('holz', 0) >= 4:
+                    p.placed_blocks += 1
+                    inv['holz'] -= 4
+                    print(f"{p.player_name} baut automatisch einen 4x4 Holzblock. Blöcke: {p.placed_blocks}.")
+                elif inv.get('holz', 0) >= 2:
                     p.atk += 2
                     inv['holz'] -= 2
                     print(f"{p.player_name} baut automatisch eine Waffe (+2 ATK).")
