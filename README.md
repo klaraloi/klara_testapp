@@ -176,6 +176,7 @@ Der Copilot arbeitet nach der **Socratic Methode**:
 - **Git** (Grundkenntnisse)
 - **Programmiersprache** je nach Projekt:
   - Python 3.8+
+   - Optional (3D-Prototyp): Ursina (pip package `ursina`) für 3D-Szenen
   - Node.js 16+ (für Web-Projekte)
   - Moderner Browser
 
@@ -301,6 +302,53 @@ Dieses Projekt ist **Open Source** und freut sich über Beiträge:
 5. Erstelle einen Pull Request
 
 ## 📄 Lizenz
+## 🎮 3D-Prototyp (Ursina)
+
+Wir haben einen ersten 3D-Prototypen (`gui3d.py`) mit dem Ursina-Engine erstellt. Er zeigt eine einfache First-Person-Umgebung, Gegner, Projektile und ein kleines Bausystem (Blocksnapping).
+
+Kurze Übersicht:
+- `WASD` + Maus: Bewegen & Blicksteuerung
+- Linksklick: Projektil abfeuern (treffen Gegner => geben Holz)
+- `B`: Platziert einen Block 2 Einheiten vor dem Spieler (kostet 1 Holz)
+- `ESC`: Spiel beenden
+
+Vorbereitung & Start (PowerShell):
+1. Stelle sicher, dass du die Projekt-venv benutzt (oder verwende die mitgelieferte .venv). Wenn du keine venv hast, bitte erst anlegen (ich helfe dabei).
+2. Wir haben ein kleines Hilfs-Skript `run_gui3d.ps1` angelegt, das pip upgradet, Ursina installiert und `gui3d.py` startet. Ausführen:
+
+```powershell
+# im Projektordner
+.\run_gui3d.ps1
+```
+
+Hinweis: Einige Systeme blockieren PowerShell-Skripte wegen der ExecutionPolicy. Falls du eine Fehlermeldung wie "is not digitally signed" bekommst, starte das Skript mit:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\run_gui3d.ps1
+```
+
+Manuelle Schritte (falls du `run_gui3d.ps1` nicht verwenden möchtest):
+
+```powershell
+# Upgrade pip (optional)
+C:/Users/klara/repos/klara_testapp/.venv/Scripts/python.exe -m pip install --upgrade pip setuptools wheel
+
+# Install Ursina
+C:/Users/klara/repos/klara_testapp/.venv/Scripts/python.exe -m pip install ursina
+
+# Starte die 3D-Demo
+C:/Users/klara/repos/klara_testapp/.venv/Scripts/python.exe C:/Users/klara/repos/klara_testapp/gui3d.py
+```
+
+Troubleshooting
+- ExecutionPolicy / Skript blockiert: nutze den Bypass-Aufruf (siehe oben).
+- Wenn die `python.exe` in `.venv/Scripts/` nicht gefunden wird: aktiviere das venv oder erstelle eine neue mit `python -m venv .venv`.
+- `Ursina`-Installation schlägt fehl: poste die Fehlermeldung, ich helfe; meist hilft ein Upgrade von `pip` und das Installieren von C++ Build Tools (Windows) oder ein aktueller Grafiktreiber.
+
+Weiteres
+- Wenn die Demo läuft und du möchtest, dass ich Spieler-HP, Wellen-Management, mehr Materialien oder eine einfache UI für den Inventarstatus ergänze, sag kurz, welche Features dir wichtig sind — ich erweitere `gui3d.py`.
+- Falls du `gui.py` (Pygame) weiterhin parallel nutzen möchtest, installiere `pygame` in der venv (`.venv\Scripts\python.exe -m pip install pygame`) und starte `gui.py` mit dem venv-Python.
+
 
 Dieses Projekt ist unter der **MIT-Lizenz** lizenziert - siehe LICENSE Datei für Details.
 
